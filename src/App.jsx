@@ -3,6 +3,13 @@ import React, { useState, useEffect } from 'react';
 import imagen1 from "../public/imagen1.png"
 import imagen2 from "../public/imagen2.png"
 import imagen3 from "../public/imagen3.png"
+import imagen4 from "../public/imagen4.png"
+import imagen5 from "../public/imagen5.png"
+import imagen6 from "../public/imagen6.png"
+import imagen7 from "../public/imagen7.png"
+import imagen8 from "../public/imagen8.png"
+import imagen9 from "../public/imagen9.png"
+import imagen10 from "../public/vite.svg"
 
 import './App.css'; // Archivo CSS para estilos personalizados
 
@@ -17,8 +24,8 @@ const App = () => {
 
   useEffect(() => {
     checkMessage(droppedImages1, [imagen1, imagen2, imagen3], setMessage1);
-    checkMessage(droppedImages2, ['/imagen4.png', '/imagen5.png', '/imagen6.png'], setMessage2);
-    checkMessage(droppedImages3, ['/imagen7.png', '/imagen8.png', '/imagen9.png'], setMessage3);
+    checkMessage(droppedImages2, [imagen4, imagen5, imagen6], setMessage2);
+    checkMessage(droppedImages3, [imagen7, imagen8, imagen9], setMessage3);
   }, [droppedImages1, droppedImages2, droppedImages3]);
 
   const checkMessage = (droppedImages, correctImages, setMessage) => {
@@ -67,9 +74,9 @@ const App = () => {
         <h2> ARRASTRAR Y SOLTAR</h2>
         <ImageRow>
           <DraggableImage
-            image={{ id: 5, src: '/imagen5.png' }}
+            image={{ id: 5, src: imagen5 }}
             handleDragStart={handleDragStart}
-            isDragged={draggedImages.some((image) => image.src === '/imagen5.png')}
+            isDragged={draggedImages.some((image) => image.src === imagen5)}
           />
          
           <DraggableImage
@@ -78,22 +85,22 @@ const App = () => {
             isDragged={draggedImages.some((image) => image.src === imagen3)}
           />
           <DraggableImage
-            image={{ id: 8, src: '/imagen8.png' }}
+            image={{ id: 8, src: imagen8 }}
             handleDragStart={handleDragStart}
-            isDragged={draggedImages.some((image) => image.src === '/imagen8.png')}
+            isDragged={draggedImages.some((image) => image.src === imagen8)}
           />
         </ImageRow>
         <ImageRow>
           <DraggableImage
-            image={{ id: 4, src: '/imagen4.png' }}
+            image={{ id: 4, src: imagen4 }}
             handleDragStart={handleDragStart}
-            isDragged={draggedImages.some((image) => image.src === '/imagen4.png')}
+            isDragged={draggedImages.some((image) => image.src === imagen4)}
           />
           
           <DraggableImage
-            image={{ id: 7, src: '/imagen7.png' }}
+            image={{ id: 7, src: imagen7 }}
             handleDragStart={handleDragStart}
-            isDragged={draggedImages.some((image) => image.src === '/imagen7.png')}
+            isDragged={draggedImages.some((image) => image.src === imagen7)}
           />
 
             <DraggableImage
@@ -109,14 +116,14 @@ const App = () => {
             isDragged={draggedImages.some((image) => image.src === imagen1)}
           />
           <DraggableImage
-            image={{ id: 9, src: '/imagen9.png' }}
+            image={{ id: 9, src: imagen9 }}
             handleDragStart={handleDragStart}
-            isDragged={draggedImages.some((image) => image.src === '/imagen9.png')}
+            isDragged={draggedImages.some((image) => image.src === imagen9)}
           />
           <DraggableImage
-            image={{ id: 6, src: '/imagen6.png' }}
+            image={{ id: 6, src: imagen6 }}
             handleDragStart={handleDragStart}
-            isDragged={draggedImages.some((image) => image.src === '/imagen6.png')}
+            isDragged={draggedImages.some((image) => image.src === imagen6)}
           />
         </ImageRow>
       </div>
@@ -137,7 +144,7 @@ const App = () => {
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           droppedImages={droppedImages2}
-          allowDraggable={['/imagen4.png', '/imagen5.png', '/imagen6.png']}
+          allowDraggable={[imagen4, imagen5, imagen6]}
           
         />
         
@@ -202,7 +209,7 @@ const DraggableImage = ({ image, handleDragStart, isDragged }) => {
       onDragStart={(event) => handleDrag(event, image)}
       style={{ opacity: isDragged ? 0.7 : 1, marginRight: '20px', background:"black"}}
     >
-      <img src={isDragged ? "/vite.svg":image.src} alt="Draggable" width="200" height="200" />
+      <img src={isDragged ? imagen10:image.src} alt="Draggable" width="200" height="200" />
     </div>
   );
 };
