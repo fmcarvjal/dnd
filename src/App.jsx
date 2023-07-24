@@ -31,7 +31,7 @@ const App = () => {
 
   const handleDrop = (event, image, container) => {
     event.preventDefault();
-    const newImage = { id: uuidv4(), src: image };
+    const newImage = { id: 10, src: image };
     if (container === 1) {
       setDroppedImages1([...droppedImages1, newImage]);
     } else if (container === 2) {
