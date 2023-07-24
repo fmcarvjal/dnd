@@ -1,5 +1,6 @@
 // App.js
 import React, { useState, useEffect } from 'react';
+import imagen1 from "../public/imagen1.png"
 
 import './App.css'; // Archivo CSS para estilos personalizados
 
@@ -13,7 +14,7 @@ const App = () => {
   const [message3, setMessage3] = useState('');
 
   useEffect(() => {
-    checkMessage(droppedImages1, ['/imagen1.png', '/imagen2.png', '/imagen3.png'], setMessage1);
+    checkMessage(droppedImages1, [imagen1, '/imagen2.png', '/imagen3.png'], setMessage1);
     checkMessage(droppedImages2, ['/imagen4.png', '/imagen5.png', '/imagen6.png'], setMessage2);
     checkMessage(droppedImages3, ['/imagen7.png', '/imagen8.png', '/imagen9.png'], setMessage3);
   }, [droppedImages1, droppedImages2, droppedImages3]);
@@ -101,9 +102,9 @@ const App = () => {
         </ImageRow>
         <ImageRow>
           <DraggableImage
-            image={{ id: 1, src: '/imagen1.png'}}
+            image={{ id: 1, src: imagen1}}
             handleDragStart={handleDragStart}
-            isDragged={draggedImages.some((image) => image.src === '/imagen1.png')}
+            isDragged={draggedImages.some((image) => image.src === imagen1)}
           />
           <DraggableImage
             image={{ id: 9, src: '/imagen9.png' }}
@@ -124,7 +125,7 @@ const App = () => {
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           droppedImages={droppedImages1}
-          allowDraggable={['/imagen1.png', '/imagen2.png', '/imagen3.png']}
+          allowDraggable={[imagen1, '/imagen2.png', '/imagen3.png']}
         />
         {message1 && <Message text={message1} />}
         <h2> Arrastrar: Helado, Batido y Té </h2>
