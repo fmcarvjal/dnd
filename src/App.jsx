@@ -64,37 +64,37 @@ const App = () => {
         <h2> ARRASTRAR Y SOLTAR</h2>
         <ImageRow>
           <DraggableImage
-            image={{ id: uuidv4(), src: '/imagen5.png' }}
+            image={{ id: 5, src: '/imagen5.png' }}
             handleDragStart={handleDragStart}
             isDragged={draggedImages.some((image) => image.src === '/imagen5.png')}
           />
          
           <DraggableImage
-            image={{ id: uuidv4(), src: '/imagen3.png' }}
+            image={{ id: 3, src: '/imagen3.png' }}
             handleDragStart={handleDragStart}
             isDragged={draggedImages.some((image) => image.src === '/imagen3.png')}
           />
           <DraggableImage
-            image={{ id: uuidv4(), src: '/imagen8.png' }}
+            image={{ id: 8, src: '/imagen8.png' }}
             handleDragStart={handleDragStart}
             isDragged={draggedImages.some((image) => image.src === '/imagen8.png')}
           />
         </ImageRow>
         <ImageRow>
           <DraggableImage
-            image={{ id: uuidv4(), src: '/imagen4.png' }}
+            image={{ id: 4, src: '/imagen4.png' }}
             handleDragStart={handleDragStart}
             isDragged={draggedImages.some((image) => image.src === '/imagen4.png')}
           />
           
           <DraggableImage
-            image={{ id: uuidv4(), src: '/imagen7.png' }}
+            image={{ id: 7, src: '/imagen7.png' }}
             handleDragStart={handleDragStart}
             isDragged={draggedImages.some((image) => image.src === '/imagen7.png')}
           />
 
             <DraggableImage
-            image={{ id: uuidv4(), src: '/imagen2.png' }}
+            image={{ id: 2, src: '/imagen2.png' }}
             handleDragStart={handleDragStart}
             isDragged={draggedImages.some((image) => image.src === '/imagen2.png')}
           />
@@ -106,12 +106,12 @@ const App = () => {
             isDragged={draggedImages.some((image) => image.src === '/imagen1.png')}
           />
           <DraggableImage
-            image={{ id: uuidv4(), src: '/imagen9.png' }}
+            image={{ id: 9, src: '/imagen9.png' }}
             handleDragStart={handleDragStart}
             isDragged={draggedImages.some((image) => image.src === '/imagen9.png')}
           />
           <DraggableImage
-            image={{ id: uuidv4(), src: '/imagen6.png' }}
+            image={{ id: 6, src: '/imagen6.png' }}
             handleDragStart={handleDragStart}
             isDragged={draggedImages.some((image) => image.src === '/imagen6.png')}
           />
@@ -182,7 +182,7 @@ const DropContainer = ({ container, onDrop, onDragOver, droppedImages, allowDrag
 
 const ImageRow = ({ children }) => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+    <div style={{ display: 'flex', justifyContent: 'flex-start'}}>
       {children}
     </div>
   );
@@ -197,9 +197,9 @@ const DraggableImage = ({ image, handleDragStart, isDragged }) => {
     <div
       draggable
       onDragStart={(event) => handleDrag(event, image)}
-      style={{ opacity: isDragged ? 0 : 1, marginRight: '10px' }}
+      style={{ opacity: isDragged ? 0.7 : 1, marginRight: '20px', background:"black"}}
     >
-      <img src={image.src} alt="Draggable" width="200" height="200" />
+      <img src={isDragged ? "/vite.svg":image.src} alt="Draggable" width="200" height="200" />
     </div>
   );
 };
