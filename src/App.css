@@ -1,0 +1,19 @@
+/* App.css */
+
+/* Estilos para centrar el contenido en la pantalla */
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Hace que el contenedor ocupe toda la altura de la pantalla */
+  margin-left: 80px;
+  margin-Right: 200px
+}
+.mensaje{
+  color: rgb(0, 255, 38);
+}
+img{
+  background-color:#e6e6fa;
+}
+
+/* Resto de los estilos personalizados que puedas necesitar */
