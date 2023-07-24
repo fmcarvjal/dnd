@@ -101,7 +101,7 @@ const App = () => {
         </ImageRow>
         <ImageRow>
           <DraggableImage
-            image={{ id: uuidv4(), src: '/imagen1.png'}}
+            image={{ id: 1, src: '/imagen1.png'}}
             handleDragStart={handleDragStart}
             isDragged={draggedImages.some((image) => image.src === '/imagen1.png')}
           />
