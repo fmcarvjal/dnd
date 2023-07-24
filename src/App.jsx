@@ -1,6 +1,8 @@
 // App.js
 import React, { useState, useEffect } from 'react';
 import imagen1 from "../public/imagen1.png"
+import imagen2 from "../public/imagen2.png"
+import imagen3 from "../public/imagen3.png"
 
 import './App.css'; // Archivo CSS para estilos personalizados
 
@@ -14,7 +16,7 @@ const App = () => {
   const [message3, setMessage3] = useState('');
 
   useEffect(() => {
-    checkMessage(droppedImages1, [imagen1, '/imagen2.png', '/imagen3.png'], setMessage1);
+    checkMessage(droppedImages1, [imagen1, imagen2, imagen3], setMessage1);
     checkMessage(droppedImages2, ['/imagen4.png', '/imagen5.png', '/imagen6.png'], setMessage2);
     checkMessage(droppedImages3, ['/imagen7.png', '/imagen8.png', '/imagen9.png'], setMessage3);
   }, [droppedImages1, droppedImages2, droppedImages3]);
@@ -71,9 +73,9 @@ const App = () => {
           />
          
           <DraggableImage
-            image={{ id: 3, src: '/imagen3.png' }}
+            image={{ id: 3, src: imagen3 }}
             handleDragStart={handleDragStart}
-            isDragged={draggedImages.some((image) => image.src === '/imagen3.png')}
+            isDragged={draggedImages.some((image) => image.src === imagen3)}
           />
           <DraggableImage
             image={{ id: 8, src: '/imagen8.png' }}
@@ -95,9 +97,9 @@ const App = () => {
           />
 
             <DraggableImage
-            image={{ id: 2, src: '/imagen2.png' }}
+            image={{ id: 2, src: imgen2 }}
             handleDragStart={handleDragStart}
-            isDragged={draggedImages.some((image) => image.src === '/imagen2.png')}
+            isDragged={draggedImages.some((image) => image.src === imagen2)}
           />
         </ImageRow>
         <ImageRow>
@@ -125,7 +127,7 @@ const App = () => {
           onDrop={handleDrop}
           onDragOver={handleDragOver}
           droppedImages={droppedImages1}
-          allowDraggable={[imagen1, '/imagen2.png', '/imagen3.png']}
+          allowDraggable={[imagen1, imagen2, imagen3]}
         />
         {message1 && <Message text={message1} />}
         <h2> Arrastrar: Helado, Batido y Té </h2>
