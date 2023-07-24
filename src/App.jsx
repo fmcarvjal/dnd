@@ -41,7 +41,7 @@ const App = () => {
 
   const handleDrop = (event, image, container) => {
     event.preventDefault();
-    const newImage = { id: 10, src: image };
+    const newImage = { id: 11, src: image };
     if (container === 1) {
       setDroppedImages1([...droppedImages1, newImage]);
     } else if (container === 2) {
@@ -128,7 +128,16 @@ const App = () => {
         </ImageRow>
       </div>
       <div>
+      <ImageRow>
+          <DraggableImage
+            image={{ id: 5, src: imagen5, width:"100", height:"100"}}
+            handleDragStart={handleDragStart}
+            isDragged={draggedImages.some((image) => image.src === imagen5)}
+          />
+
+        </ImageRow>
       <h2> Arrastrar: Barrer, Tomar y Ahorrar</h2>
+      
         <DropContainer
           container={1}
           onDrop={handleDrop}
