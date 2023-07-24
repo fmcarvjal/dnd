@@ -97,7 +97,7 @@ const App = () => {
           />
 
             <DraggableImage
-            image={{ id: 2, src: imgen2 }}
+            image={{ id: 2, src: imagen2 }}
             handleDragStart={handleDragStart}
             isDragged={draggedImages.some((image) => image.src === imagen2)}
           />
