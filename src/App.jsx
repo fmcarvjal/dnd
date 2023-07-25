@@ -199,9 +199,9 @@ const DropContainer = ({ container, onDrop, onDragOver, droppedImages, allowDrag
       style={{
         border: '2px dashed black',
         padding: '20px',
-        marginTop: '20px',
+        marginTop: '2px',
         background:"#e6e6fa",
-        height:"250"
+        height:"150"
       }}
     >
       <h2></h2>
