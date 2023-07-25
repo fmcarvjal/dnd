@@ -16,6 +16,7 @@ import './App.css'; // Archivo CSS para estilos personalizados
 const App = () => {
 
   const [p, setP] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const [droppedImages1, setDroppedImages1] = useState([]);
   const [droppedImages2, setDroppedImages2] = useState([]);
@@ -30,6 +31,18 @@ const App = () => {
     checkMessage(droppedImages2, [imagen4, imagen5, imagen6], setMessage2);
     checkMessage(droppedImages3, [imagen7, imagen8, imagen9], setMessage3);
   }, [droppedImages1, droppedImages2, droppedImages3]);
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setP((P) => !P);
+      setIsButtonDisabled(false); // Habilitar el botón nuevamente después de los 10 segundos
+    }, 10000); // 10 segundos en milisegundos
+
+    setIsButtonDisabled(true); // Deshabilitar el botón mientras ocurre el cambio automático
+
+    return () => clearTimeout(timer);
+  }, []);
+
 
   const checkMessage = (droppedImages, correctImages, setMessage) => {
     const sortedDroppedImages = droppedImages.map((image) => image.src).sort();
@@ -80,7 +93,7 @@ const App = () => {
    
       <div style={{ marginRight: '150px' }}>
         <h2> MEMORIA VISUAL - ARRASTRAR Y SOLTAR</h2>
-        <button onClick={cambioStrado}>  {p ? 'Mostrar Secuencia':'Ocultar Secuencia' } </button>
+        <button onClick={cambioStrado} disabled={isButtonDisabled}>  {p ? 'Mostrar Secuencia':'Ocultar Secuencia' } </button>
 
         
         <ImageRow>
@@ -88,17 +101,21 @@ const App = () => {
             image={{ id: 5, src: imagen5 }}
             handleDragStart={handleDragStart}
             isDragged={draggedImages.some((image) => image.src === imagen5)}
+            disable = {isButtonDisabled}
+          
           />
          
           <DraggableImage
             image={{ id: 3, src: imagen3 }}
             handleDragStart={handleDragStart}
             isDragged={draggedImages.some((image) => image.src === imagen3)}
+            disable = {isButtonDisabled}
           />
           <DraggableImage
             image={{ id: 8, src: imagen8 }}
             handleDragStart={handleDragStart}
             isDragged={draggedImages.some((image) => image.src === imagen8)}
+            disable = {isButtonDisabled}
           />
         </ImageRow>
         <ImageRow>
@@ -106,18 +123,21 @@ const App = () => {
             image={{ id: 4, src: imagen4 }}
             handleDragStart={handleDragStart}
             isDragged={draggedImages.some((image) => image.src === imagen4)}
+            disable = {isButtonDisabled}
           />
           
           <DraggableImage
             image={{ id: 7, src: imagen7 }}
             handleDragStart={handleDragStart}
             isDragged={draggedImages.some((image) => image.src === imagen7)}
+            disable = {isButtonDisabled}
           />
 
             <DraggableImage
             image={{ id: 2, src: imagen2 }}
             handleDragStart={handleDragStart}
             isDragged={draggedImages.some((image) => image.src === imagen2)}
+            disable = {isButtonDisabled}
           />
         </ImageRow>
         <ImageRow>
@@ -125,16 +145,19 @@ const App = () => {
             image={{ id: 1, src: imagen1}}
             handleDragStart={handleDragStart}
             isDragged={draggedImages.some((image) => image.src === imagen1)}
+            disable = {isButtonDisabled}
           />
           <DraggableImage
             image={{ id: 9, src: imagen9 }}
             handleDragStart={handleDragStart}
             isDragged={draggedImages.some((image) => image.src === imagen9)}
+            disable = {isButtonDisabled}
           />
           <DraggableImage
             image={{ id: 6, src: imagen6 }}
             handleDragStart={handleDragStart}
             isDragged={draggedImages.some((image) => image.src === imagen6)}
+            disable = {isButtonDisabled}
           />
         </ImageRow>
       </div>
@@ -227,7 +250,7 @@ const ImageRow = ({ children }) => {
   );
 };
 
-const DraggableImage = ({ image, handleDragStart, isDragged }) => {
+const DraggableImage = ({ image, handleDragStart, isDragged, disable }) => {
   
 
   const handleDrag = (event) => {
@@ -236,11 +259,11 @@ const DraggableImage = ({ image, handleDragStart, isDragged }) => {
 
   return (
     <div
-      draggable
+      draggable = {false}
       onDragStart={(event) => handleDrag(event, image)}
       style={{ opacity: isDragged? 1 : 0.6, marginRight: '20px', background:"white"}}
     >
-      <img src={isDragged ? image.src:imagen10} alt="Draggable" width="180" height="180" />
+      <img src={isDragged && !disable? image.src:imagen10}  alt="Draggable" width="180" height="180"  />
       
     </div>
     
