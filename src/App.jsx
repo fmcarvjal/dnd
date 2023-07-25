@@ -143,7 +143,7 @@ const App = () => {
       
       <ImageRow>
     
-            <div style={{ opacity: p? 0:1, marginRight: '120px'}}>
+            <div style={{ opacity: p? 0:1, marginRight: '40px'}}>
             <img src={imagen1} alt="Draggable" width="90" height="90" />
             <img src={imagen2} alt="Draggable" width="90" height="90" />
             <img src={imagen3} alt="Draggable" width="90" height="90" />
