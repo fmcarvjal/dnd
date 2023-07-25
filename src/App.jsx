@@ -78,9 +78,8 @@ const App = () => {
    
     <div className="app-container">
    
-      <div style={{ marginRight: '200px' }}>
-
-        <h2> ARRASTRAR Y SOLTAR</h2>
+      <div style={{ marginRight: '150px' }}>
+        <h2> MEMORIA VISUAL - ARRASTRAR Y SOLTAR</h2>
         <button onClick={cambioStrado}>  {p ? 'Mostrar Secuencia':'Ocultar Secuencia' } </button>
 
         
@@ -241,7 +240,7 @@ const DraggableImage = ({ image, handleDragStart, isDragged }) => {
       onDragStart={(event) => handleDrag(event, image)}
       style={{ opacity: isDragged? 1 : 0.6, marginRight: '20px', background:"white"}}
     >
-      <img src={isDragged ? image.src:imagen10} alt="Draggable" width="200" height="200" />
+      <img src={isDragged ? image.src:imagen10} alt="Draggable" width="180" height="180" />
       
     </div>
     

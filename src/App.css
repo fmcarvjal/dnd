@@ -16,11 +16,22 @@
 }
 img{
   background-color:#e6e6fa;
+  border: #6f077d solid;
+  border-radius: 20px;
+  padding: 5px;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.5))
+}
+
+img:hover{
+  border: #e6e923 solid;
+  transform: translateY(-5px);
+  transition: transform 0.7s ease;
 }
 
 button{
   margin-bottom: 10px;
   color: blue;
+
 
 }
 
