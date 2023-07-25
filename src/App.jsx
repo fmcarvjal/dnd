@@ -49,7 +49,7 @@ const App = () => {
     const sortedCorrectImages = correctImages.sort();
 
     if (sortedDroppedImages.join(',') === sortedCorrectImages.join(',')) {
-      setMessage('BIEN HECHO');
+      setMessage('VERIFICA LA RESPUESTA');
     } else {
       setMessage(' ');
     }
@@ -91,10 +91,10 @@ const App = () => {
    
     <div className="app-container">
    
-      <div style={{ marginRight: '150px' }}>
-        <h2> MEMORIA VISUAL - ARRASTRAR Y SOLTAR</h2>
+      <div style={{ marginRight: '150px', marginBottom: "80" }}>
+        
         <button onClick={cambioStrado} disabled={isButtonDisabled}>  {p ? 'Mostrar Secuencia':'Ocultar Secuencia' } </button>
-
+        <h2> MEMORIA VISUAL - ARRASTRAR Y SOLTAR</h2>
         
         <ImageRow>
           <DraggableImage
@@ -166,7 +166,7 @@ const App = () => {
       
       <ImageRow>
     
-            <div style={{ opacity: p? 0:1, marginRight: '40px'}}>
+            <div style={{ opacity: p ? 0:1, marginRight: '40px'}}>
             <img src={imagen1} alt="Draggable" width="90" height="90" />
             <img src={imagen2} alt="Draggable" width="90" height="90" />
             <img src={imagen3} alt="Draggable" width="90" height="90" />
@@ -220,11 +220,12 @@ const DropContainer = ({ container, onDrop, onDragOver, droppedImages, allowDrag
       onDrop={handleContainerDrop}
       onDragOver={onDragOver}
       style={{
+        display:'flex',
         border: '2px dashed black',
-        padding: '20px',
-        marginTop: '2px',
+        padding: '4px',
+        maxHeight:"100",
         background:"#e6e6fa",
-        height:"150"
+      
       }}
     >
       <h2></h2>

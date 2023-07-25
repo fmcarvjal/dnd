@@ -29,10 +29,16 @@ img:hover{
 }
 
 button{
-  margin-bottom: 10px;
-  color: blue;
+  margin-bottom: 1px;
+  color: #e6e6fa;
+  background-color: #e6e6fa;
+  background: #e6e6fa;
+  border: none;
 
+}
 
+h2 {
+  margin-bottom: 50px;
 }
 
 /* Resto de los estilos personalizados que puedas necesitar */
