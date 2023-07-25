@@ -14,6 +14,9 @@ import imagen10 from "../public/vite.svg"
 import './App.css'; // Archivo CSS para estilos personalizados
 
 const App = () => {
+
+  const [p, setP] = useState(false);
+
   const [droppedImages1, setDroppedImages1] = useState([]);
   const [droppedImages2, setDroppedImages2] = useState([]);
   const [droppedImages3, setDroppedImages3] = useState([]);
@@ -64,6 +67,12 @@ const App = () => {
   const handleDragOver = (event) => {
     event.preventDefault();
   };
+  const cambioStrado = () => {
+    setP((prevState) => !prevState);
+  
+  };
+
+
 
   return (
    
@@ -72,6 +81,9 @@ const App = () => {
       <div style={{ marginRight: '200px' }}>
 
         <h2> ARRASTRAR Y SOLTAR</h2>
+        <button onClick={cambioStrado}>  {p ? 'Mostrar Secuencia':'Ocultar Secuencia' } </button>
+
+        
         <ImageRow>
           <DraggableImage
             image={{ id: 5, src: imagen5 }}
@@ -128,15 +140,19 @@ const App = () => {
         </ImageRow>
       </div>
       <div>
+     
+      
       <ImageRow>
-          <DraggableImage
-            image={{ id: 5, src: imagen5, width:"100", height:"100"}}
-            handleDragStart={handleDragStart}
-            isDragged={draggedImages.some((image) => image.src === imagen5)}
-          />
+    
+            <div style={{ opacity: p? 0:1, marginRight: '120px'}}>
+            <img src={imagen1} alt="Draggable" width="90" height="90" />
+            <img src={imagen2} alt="Draggable" width="90" height="90" />
+            <img src={imagen3} alt="Draggable" width="90" height="90" />
+            </div>
+        
 
         </ImageRow>
-      <h2> Arrastrar: Barrer, Tomar y Ahorrar</h2>
+      
       
         <DropContainer
           container={1}
@@ -146,7 +162,11 @@ const App = () => {
           allowDraggable={[imagen1, imagen2, imagen3]}
         />
         {message1 && <Message text={message1} />}
-        <h2> Arrastrar: Helado, Batido y Té </h2>
+        <div style={{ opacity: p? 0:1, marginRight: '40px'}}>
+            <img src={imagen4} alt="Draggable" width="90" height="90" />
+            <img src={imagen5} alt="Draggable" width="90" height="90" />
+            <img src={imagen6} alt="Draggable" width="90" height="90" />
+            </div>
         <DropContainer
         
           container={2}
@@ -181,7 +201,8 @@ const DropContainer = ({ container, onDrop, onDragOver, droppedImages, allowDrag
         border: '2px dashed black',
         padding: '20px',
         marginTop: '20px',
-        background:"#e6e6fa"
+        background:"#e6e6fa",
+        height:"250"
       }}
     >
       <h2></h2>
@@ -190,8 +211,8 @@ const DropContainer = ({ container, onDrop, onDragOver, droppedImages, allowDrag
           key={image.id}
           src={image.src}
           alt={`Dropped ${index}`}
-          width="150"
-          height="150"
+          width="100"
+          height="100"
           
         />
       ))}
@@ -208,6 +229,8 @@ const ImageRow = ({ children }) => {
 };
 
 const DraggableImage = ({ image, handleDragStart, isDragged }) => {
+  
+
   const handleDrag = (event) => {
     handleDragStart(event, image);
   };
@@ -216,10 +239,12 @@ const DraggableImage = ({ image, handleDragStart, isDragged }) => {
     <div
       draggable
       onDragStart={(event) => handleDrag(event, image)}
-      style={{ opacity: isDragged ? 0.7 : 1, marginRight: '20px', background:"black"}}
+      style={{ opacity: isDragged? 1 : 0.6, marginRight: '20px', background:"white"}}
     >
-      <img src={isDragged ? imagen10:image.src} alt="Draggable" width="200" height="200" />
+      <img src={isDragged ? image.src:imagen10} alt="Draggable" width="200" height="200" />
+      
     </div>
+    
   );
 };
 
@@ -230,5 +255,7 @@ const Message = ({ text }) => {
     </div>
   );
 };
+
+
 
 export default App;
