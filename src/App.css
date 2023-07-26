@@ -1,6 +1,15 @@
 /* App.css */
 
 
+.habilitar-contenedores{
+  margin-bottom: 1px;
+  color: #2424a7;
+  background-color: #e6e6fa;
+  background: #e6e6fa;
+  margin-bottom: 10px;
+  margin-right: 20px;
+
+}
 
 /* Estilos para centrar el contenido en la pantalla */
 .app-container {
@@ -8,8 +17,8 @@
   justify-content: center;
   align-items: center;
   height: 100vh; /* Hace que el contenedor ocupe toda la altura de la pantalla */
-  margin-left: 80px;
-  margin-Right: 200px
+  margin-left: 8px;
+  margin-Right: 0px;
 }
 .mensaje{
   color: rgb(0, 255, 38);
@@ -42,3 +51,16 @@ h2 {
 }
 
 /* Resto de los estilos personalizados que puedas necesitar */
+/* Resto de estilos CSS... */
+
+/* Añadir estilos para la expansión y contracción del contenedor */
+.expanded {
+  max-height: 300px; /* Altura máxima cuando está expandido */
+  transition: max-height 0.5s ease-in-out; /* Transición suave al cambiar la altura */
+}
+
+.contracted {
+  max-height: 0; /* Altura mínima cuando está contraído (0 para ocultar) */
+  overflow: hidden; /* Oculta el contenido que exceda la altura mínima */
+  transition: max-height 0.5s ease-in-out; /* Transición suave al cambiar la altura */
+}
