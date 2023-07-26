@@ -36,7 +36,7 @@ const App = () => {
     const timer = setTimeout(() => {
       setP((P) => !P);
       setIsButtonDisabled(false); // Habilitar el botón nuevamente después de los 10 segundos
-    }, 1000); // 10 segundos en milisegundos
+    }, 5000); // 10 segundos en milisegundos
 
     setIsButtonDisabled(true); // Deshabilitar el botón mientras ocurre el cambio automático
 
