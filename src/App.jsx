@@ -15,8 +15,10 @@ import "./App.css"; // Archivo CSS para estilos personalizados
 
 const App = () => {
   const [p, setP] = useState(false);
+
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [enabledContainer, setEnabledContainer] = useState(1);
+  const [isReset, setIsReset] = useState(true);
 
   const [droppedImages1, setDroppedImages1] = useState([]);
   const [droppedImages2, setDroppedImages2] = useState([]);
@@ -36,12 +38,12 @@ const App = () => {
     const timer = setTimeout(() => {
       setP((P) => !P);
       setIsButtonDisabled(false); // Habilitar el botón nuevamente después de los 10 segundos
-    }, 5000); // 10 segundos en milisegundos
+    }, 5000); // 5 segundos en milisegundos
 
     setIsButtonDisabled(true); // Deshabilitar el botón mientras ocurre el cambio automático
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [isReset,enabledContainer]);
 
   const checkMessage = (droppedImages, correctImages, setMessage) => {
     const sortedDroppedImages = droppedImages.map((image) => image.src).sort();
@@ -81,11 +83,28 @@ const App = () => {
   };
   const cambioStrado = () => {
     setP((prevState) => !prevState);
+    
   };
 
   const handleContainerToggle = (container) => {
     setEnabledContainer(container); // Cambiar el contenedor habilitado
+    
   };
+
+  const resetApp = () => {
+    setP(false);
+    setIsButtonDisabled(false);
+    setEnabledContainer(1);
+    setDroppedImages1([]);
+    setDroppedImages2([]);
+    setDroppedImages3([]);
+    setDraggedImages([]);
+    setMessage1("");
+    setMessage2("");
+    setMessage3("arrastrar aqui");
+    setIsReset(false);
+  };
+
 
   return (
     <div className="app-container">
@@ -106,13 +125,20 @@ const App = () => {
             4Imagenes
           </button>
           <button className="habilitar-contenedores"
-            onClick={() => handleContainerToggle(3)}
+            onClick={() => handleContainerToggle(3) }
             disabled={isButtonDisabled}
           >
             5Imagenes
           </button>
+
+          <button className="habilitar-contenedores"
+            onClick={resetApp}
+            disabled={isButtonDisabled}
+          >
+            Reiniciar
+          </button>
         </div>
-         {/* Agregar botones de selección para habilitar contenedores */}
+         {/* Fin  Agregar botones de selección para habilitar contenedores */}
       <div style={{ marginRight: "90px", marginBottom: "80" }}>
         <button onClick={cambioStrado} disabled={isButtonDisabled}>
           {p ? "Mostrar Secuencia" : "Ocultar Secuencia"}{" "}
