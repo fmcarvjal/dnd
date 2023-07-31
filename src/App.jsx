@@ -208,7 +208,7 @@ const App = () => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-evenly",
-          marginBottom: "200px",
+          marginBottom: "100px",
           gap:"10px",
         
         }}
