@@ -15,7 +15,6 @@ import "./App.css"; // Archivo CSS para estilos personalizados
 
 const App = () => {
   const [p, setP] = useState(false);
-
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [enabledContainer, setEnabledContainer] = useState(0);
   const [isReset, setIsReset] = useState(true);
@@ -115,6 +114,7 @@ const App = () => {
       }, 5000); // 5 segundos en milisegundos
 
       setIsButtonDisabled(true); // Deshabilitar el botón mientras ocurre el cambio automático
+      
 
       return () => clearTimeout(timer);
     }
@@ -133,6 +133,7 @@ const App = () => {
               handleDragStart={handleDragStart}
               isDragged={draggedImages.some((image) => image.src === imagen5)}
               disable={isButtonDisabled}
+              p={p}
             />
 
             <DraggableImage
@@ -140,12 +141,14 @@ const App = () => {
               handleDragStart={handleDragStart}
               isDragged={draggedImages.some((image) => image.src === imagen3)}
               disable={isButtonDisabled}
+              p={p}
             />
             <DraggableImage
               image={{ id: 8, src: imagen8 }}
               handleDragStart={handleDragStart}
               isDragged={draggedImages.some((image) => image.src === imagen8)}
               disable={isButtonDisabled}
+              p={p}
             />
           </ImageRow>
           <ImageRow>
@@ -154,6 +157,7 @@ const App = () => {
               handleDragStart={handleDragStart}
               isDragged={draggedImages.some((image) => image.src === imagen4)}
               disable={isButtonDisabled}
+              p={p}
             />
 
             <DraggableImage
@@ -161,6 +165,7 @@ const App = () => {
               handleDragStart={handleDragStart}
               isDragged={draggedImages.some((image) => image.src === imagen7)}
               disable={isButtonDisabled}
+              p={p}
             />
 
             <DraggableImage
@@ -168,6 +173,7 @@ const App = () => {
               handleDragStart={handleDragStart}
               isDragged={draggedImages.some((image) => image.src === imagen2)}
               disable={isButtonDisabled}
+              p={p}
             />
           </ImageRow>
           <ImageRow>
@@ -176,18 +182,21 @@ const App = () => {
               handleDragStart={handleDragStart}
               isDragged={draggedImages.some((image) => image.src === imagen1)}
               disable={isButtonDisabled}
+              p={p}
             />
             <DraggableImage
               image={{ id: 9, src: imagen9 }}
               handleDragStart={handleDragStart}
               isDragged={draggedImages.some((image) => image.src === imagen9)}
               disable={isButtonDisabled}
+              p={p}
             />
             <DraggableImage
               image={{ id: 6, src: imagen6 }}
               handleDragStart={handleDragStart}
               isDragged={draggedImages.some((image) => image.src === imagen6)}
               disable={isButtonDisabled}
+              p={p}
             />
           </ImageRow>
         </div>
@@ -371,7 +380,7 @@ const ImageRow = ({ children }) => {
   );
 };
 
-const DraggableImage = ({ image, handleDragStart, isDragged, disable }) => {
+const DraggableImage = ({ image, handleDragStart, isDragged, disable,p }) => {
   const handleDrag = (event) => {
     handleDragStart(event, image);
   };
@@ -387,7 +396,7 @@ const DraggableImage = ({ image, handleDragStart, isDragged, disable }) => {
       }}
     >
       <img
-        src={isDragged && !disable ? image.src : imagen10}
+        src={(p || isDragged)&& !disable ? image.src : imagen10}
         alt="Draggable"
         width="180"
         height="180"
