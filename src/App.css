@@ -1,66 +1,159 @@
 /* App.css */
 
+/* Estilos globales */
 
-.habilitar-contenedores{
-  margin-bottom: 1px;
-  color: #2424a7;
-  background-color: #e6e6fa;
-  background: #e6e6fa;
-  margin-bottom: 10px;
-  margin-right: 20px;
 
-}
 
-/* Estilos para centrar el contenido en la pantalla */
-.app-container {
+/* Estilos del contenedor principal */
+
+.contenedor-body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Hace que el contenedor ocupe toda la altura de la pantalla */
+  height: 100vh;
+  margin-left: 100px;
+  margin-right: 2px;
+  margin-top: 0;
+}
+
+.app-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   margin-left: 8px;
-  margin-Right: 0px;
+  margin-bottom: 0;
+
 }
-.mensaje{
-  color: rgb(0, 255, 38);
-}
-img{
-  background-color:#e6e6fa;
-  border: #6f077d solid;
+
+/* Estilos de los botones */
+
+
+/* Estilos de las imágenes */
+
+img {
+  background-color: #e6e6fa;
+  border: 2px solid #6f077d;
   border-radius: 20px;
   padding: 5px;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.5))
+  background-image: linear-gradient(
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.5)
+  );
+  transition: border 0.3s ease, transform 0.3s ease;
 }
 
-img:hover{
-  border: #e6e923 solid;
+img:hover {
+  border-color: #e6e923;
   transform: translateY(-5px);
-  transition: transform 0.7s ease;
 }
 
-button{
-  margin-bottom: 1px;
-  color: #e6e6fa;
-  background-color: #e6e6fa;
+/* Estilos de los mensajes */
+
+.mensaje {
+  color: #00ff26;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+/* Estilos de los contenedores */
+
+.drop-container {
+  display: flex;
+  border: 2px dashed black;
+  padding: 4px;
+  max-height: 110px;
   background: #e6e6fa;
-  border: none;
+  height: 100px;
+}
+
+.drop-container h2 {
+  margin: 0;
+}
+
+/* Estilos para expandir y contraer botones */
+
+.expanded {
+  display: flex;
+  margin-right: 10px;
+  max-height: 80px;
+  position: relative;
+  top: 10; /* Posicionar el contenedor en la parte superior */
+  right: 0; /* Posicionar el contenedor en la esquina derecha */
+  background-color: #fff; /* Color de fondo del contenedor */
+  padding: 10px; /* Agregar un poco de espacio interno */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Agregar sombra */
+  transition: max-height 0.5s ease-out;
+}
+
+.contracted {
+  display: flex;
+  margin-right: 10px;
+  max-height: 0px;
+  overflow: hidden;
+  position: relative;
+  top: 10; /* Posicionar el contenedor en la parte superior */
+  right: 0; /* Posicionar el contenedor en la esquina derecha */
+  background-color: #fff; /* Color de fondo del contenedor */
+  transition: max-height 0.5s ease-in-out;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Agregar sombra */
+  
 
 }
+
+.expanded button {
+  background-color: #86dde2;
+  color: #2509a4;
+  cursor: pointer;
+  font-size: "74px";
+  font-weight: "300";
+}
+
+.contracted  button {
+  background-color: #d3e81c;
+  color: #1d0202;
+  cursor: not-allowed;
+}
+
+.expanded button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  font-size: "24px";
+  font-weight: "300";
+  
+}
+
+
+
+/* Estilos de los encabezados */
 
 h2 {
   margin-bottom: 50px;
 }
 
+/* Estilos de las filas de imágenes */
+
+.image-row {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+/* Estilos de las imágenes arrastrables */
+
+.draggable-image {
+  opacity: 0.6;
+  margin-right: 20px;
+  background: white;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.draggable-image.is-dragged {
+  opacity: 1;
+}
+
 /* Resto de los estilos personalizados que puedas necesitar */
-/* Resto de estilos CSS... */
-
-/* Añadir estilos para la expansión y contracción del contenedor */
-.expanded {
-  max-height: 300px; /* Altura máxima cuando está expandido */
-  transition: max-height 0.5s ease-in-out; /* Transición suave al cambiar la altura */
-}
-
-.contracted {
-  max-height: 0; /* Altura mínima cuando está contraído (0 para ocultar) */
-  overflow: hidden; /* Oculta el contenido que exceda la altura mínima */
-  transition: max-height 0.5s ease-in-out; /* Transición suave al cambiar la altura */
-}
