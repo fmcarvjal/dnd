@@ -1,5 +1,5 @@
 // App.js
-import React, { useState, useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import imagen1 from "../public/imagen1.png";
 import imagen2 from "../public/imagen2.png";
 import imagen3 from "../public/imagen3.png";
@@ -10,6 +10,7 @@ import imagen7 from "../public/imagen7.png";
 import imagen8 from "../public/imagen8.png";
 import imagen9 from "../public/imagen9.png";
 import imagen10 from "../public/vite.svg";
+import imagen11 from "../public/fondo.jpeg"
 
 import "./App.css"; // Archivo CSS para estilos personalizados
 
@@ -18,7 +19,8 @@ const App = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [enabledContainer, setEnabledContainer] = useState(0);
   const [isReset, setIsReset] = useState(true);
-  
+  const [time, setTime] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
 
   const [droppedImages1, setDroppedImages1] = useState([]);
   const [droppedImages2, setDroppedImages2] = useState([]);
@@ -28,8 +30,6 @@ const App = () => {
   const [message2, setMessage2] = useState("");
   const [message3, setMessage3] = useState("arrastrar aqui");
 
-
-  
   useEffect(() => {
     checkMessage(droppedImages1, [imagen1, imagen2, imagen3], setMessage1);
     checkMessage(
@@ -44,17 +44,23 @@ const App = () => {
     );
   }, [droppedImages1, droppedImages2, droppedImages3]);
 
-  
+  useEffect(() => {
+    let interval;
+    if (isRunning) {
+      interval = setInterval(() => {
+        setTime((prevTime) => prevTime + 1);
+      }, 1000); // Incrementar el tiempo en 1 segundo (1000 milisegundos)
+    }
 
-
-  
+    return () => clearInterval(interval); // Limpiar el intervalo cuando se desmonte el componente
+  }, [isRunning]);
 
   const checkMessage = (droppedImages, correctImages, setMessage) => {
     const sortedDroppedImages = droppedImages.map((image) => image.src).sort();
     const sortedCorrectImages = correctImages.sort();
 
     if (sortedDroppedImages.join(",") === sortedCorrectImages.join(",")) {
-      setMessage("VERIFICA LA RESPUESTA");
+      setMessage("");
     } else {
       setMessage(" ");
     }
@@ -101,33 +107,62 @@ const App = () => {
     setIsReset(false);
     setP(false);
     setIsButtonDisabled(false);
-    setIsReset((previo)=>!previo)
-
+    setIsReset((previo) => !previo);
+    setTime(0);
+    startTimer();
   };
-  
-  
+
   useEffect(() => {
     if (enabledContainer) {
       const timer = setTimeout(() => {
         setP((prevP) => !prevP);
         setIsButtonDisabled(false); // Habilitar el botón nuevamente después de los 5 segundos
+        stopTimer();
       }, 5000); // 5 segundos en milisegundos
 
       setIsButtonDisabled(true); // Deshabilitar el botón mientras ocurre el cambio automático
-      
 
       return () => clearTimeout(timer);
     }
   }, [isReset, enabledContainer]);
 
+  // Agregar la función para iniciar el cronómetro
+  const startTimer = () => {
+    setIsRunning(true);
+  };
+
+  // Agregar la función para detener el cronómetro
+  const stopTimer = () => {
+    setIsRunning(false);
+    setTime(0);
+  };
+
   return (
     <div className="contenedor-body">
-      
-      <div> <h2> MEMORIA VISUAL - ARRASTRAR Y SOLTAR</h2> </div>
+      <div 
+      style={{
+            display: "flex",
+            position:"fixed",
+            top:0,
+            left:95,
+            marginTop:20
+          }}
+      >
+        <h2> MEMORIA VISUAL - ARRASTRAR Y SOLTAR</h2>{" "}
+      </div>
+
+      {/* Visualización del cronómetro */}
+
       <div className="app-container">
-           
-        <div style={{display:"flex",flexDirection:"column", marginRight: "90px", marginBottom: "80" }}>
-            <ImageRow>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            marginRight: "90px",
+            marginBottom: "80",
+          }}
+        >
+          <ImageRow>
             <DraggableImage
               image={{ id: 5, src: imagen5 }}
               handleDragStart={handleDragStart}
@@ -201,64 +236,67 @@ const App = () => {
           </ImageRow>
         </div>
 
-        <div>  
-        <div style={{ marginBottom:"20px"}}>
-        <button onClick={cambioStrado} disabled={isButtonDisabled}>
-            {p ? "Mostrar Secuencia" : "Seleccione una Secuencia"}{" "}
-          </button>
-      </div> 
-     {/* Agregar botones de selección para habilitar contenedores */}
-     
-     <div
-        className={`${
-          !p ? "expanded" : "contracted"
-        }`}
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-evenly",
-          marginBottom: "100px",
-          gap:"10px",
-        
-        }}
-      >
-       
-        <button
-          onClick={() => handleContainerToggle(1)}
-          disabled={isButtonDisabled}
-        
-        >
-          3-Imágenes
-        </button>
-        <button
-          onClick={() => handleContainerToggle(2)}
-          disabled={isButtonDisabled}
-          
-        >
-          4-Imágenes
-        </button>
-        <button
-          onClick={() => handleContainerToggle(3)}
-          disabled={isButtonDisabled}
-        >
-          5-Imágenes
-        </button>
+        <div>
+          <div className="timer-and-button">
+           
+            <div style={{ marginBottom: "0px" }}>
+              <button onClick={cambioStrado} disabled={isButtonDisabled}>
+                {p ? "Mostrar Secuencia" : "Seleccione una Secuencia"}
+              </button>
+            </div>
+            <div className="time" >
+              <h2>    {time} </h2>
+            </div>
+          </div>
+          {/* Agregar botones de selección para habilitar contenedores */}
 
-               
-      </div>
-      
-      {/* Fin  Agregar botones de selección para habilitar contenedores */}
-        
+          <div
+            className={`${!p ? "expanded" : "contracted"}`}
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-evenly",
+              marginBottom: "100px",
+              gap: "10px",
+            }}
+          >
+          {enabledContainer != 1 && (
+            <button
+              onClick={() => handleContainerToggle(1)}
+              disabled={isButtonDisabled}
+            >
+              3-Imágenes
+            </button>
+            )}
 
-      {enabledContainer === 0 && (
+            {enabledContainer != 2 && (
+            <button
+              onClick={() => handleContainerToggle(2)}
+              disabled={isButtonDisabled}
+            >
+              4-Imágenes
+            </button>
+            )}
+
+            {enabledContainer != 3 && (
+            <button
+              onClick={() => handleContainerToggle(3)}
+              disabled={isButtonDisabled}
+            >
+              5-Imágenes
+            </button>
+            )}
+          </div>
+
+          {/* Fin  Agregar botones de selección para habilitar contenedores */}
+
+          {enabledContainer === 0 && (
             <div>
-             
               <DropContainer
                 container={0}
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
                 droppedImages={droppedImages1}
-              
               />
               {message1 && <Message text={message1} />}
             </div>
@@ -266,9 +304,9 @@ const App = () => {
           {enabledContainer === 1 && (
             <div>
               <div style={{ opacity: p ? 0 : 1, marginRight: "40px" }}>
-                <img src={imagen1} alt="Draggable" width="90" height="90" />
-                <img src={imagen2} alt="Draggable" width="90" height="90" />
-                <img src={imagen3} alt="Draggable" width="90" height="90" />
+                <img src={imagen1} alt="Draggable" width="130" height="130" />
+                <img src={imagen2} alt="Draggable" width="130" height="130" />
+                <img src={imagen3} alt="Draggable" width="130" height="130" />
               </div>
 
               <DropContainer
@@ -285,7 +323,7 @@ const App = () => {
           {enabledContainer === 2 && (
             <div>
               <div style={{ opacity: p ? 0 : 1, marginRight: "40px" }}>
-                <img src={imagen4} alt="Draggable" width="90" height="90" />
+                <img src={imagen4} alt="Draggable" width="90" height="90" gap= "10px"/>
                 <img src={imagen5} alt="Draggable" width="90" height="90" />
                 <img src={imagen6} alt="Draggable" width="90" height="90" />
                 <img src={imagen9} alt="Draggable" width="90" height="90" />
@@ -344,7 +382,6 @@ const DropContainer = ({
       onDrop(event, image, container);
     }
   };
-
   return (
     <div
       onDrop={handleContainerDrop}
@@ -356,6 +393,7 @@ const DropContainer = ({
         maxHeight: "110",
         background: "#e6e6fa",
         height: "100",
+        marginBottom:"100px",
       }}
     >
       <h2></h2>
@@ -380,7 +418,7 @@ const ImageRow = ({ children }) => {
   );
 };
 
-const DraggableImage = ({ image, handleDragStart, isDragged, disable,p }) => {
+const DraggableImage = ({ image, handleDragStart, isDragged, disable, p }) => {
   const handleDrag = (event) => {
     handleDragStart(event, image);
   };
@@ -390,13 +428,13 @@ const DraggableImage = ({ image, handleDragStart, isDragged, disable,p }) => {
       draggable={false}
       onDragStart={(event) => handleDrag(event, image)}
       style={{
-        opacity: isDragged ? 1 : 0.6,
+        opacity: isDragged ? 1 : 0.8,
         marginRight: "20px",
         background: "white",
       }}
     >
       <img
-        src={(p || isDragged)&& !disable ? image.src : imagen10}
+        src={(p || isDragged) && !disable ? image.src : imagen10}
         alt="Draggable"
         width="180"
         height="180"
@@ -414,4 +452,3 @@ const Message = ({ text }) => {
 };
 
 export default App;
-
