@@ -99,10 +99,9 @@ img:hover {
   padding-left: 10px;
   padding-right: 10px;
   right: 0; /* Posicionar el contenedor en la esquina derecha */
-  background-color: #fff; /* Color de fondo del contenedor */
   
   transition: max-height 0.5s ease-in-out;
-  box-shadow: 0 2px 5px rgba(1, 0.67, 0, 0.2); /* Agregar sombra */
+ 
 
   
 
@@ -158,5 +157,4 @@ h2 {
   align-items: center;
   height: 100%;
 }
-
 

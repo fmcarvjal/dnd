@@ -303,10 +303,10 @@ const App = () => {
           )}
           {enabledContainer === 1 && (
             <div>
-              <div style={{ opacity: p ? 0 : 1, marginRight: "40px" }}>
-                <img src={imagen1} alt="Draggable" width="130" height="130" />
-                <img src={imagen2} alt="Draggable" width="130" height="130" />
-                <img src={imagen3} alt="Draggable" width="130" height="130" />
+              <div style={{ opacity: p ? 0 : 1,backgroundColor:"blue",display:"flex", justifyContent: "space-evenly",marginBottom:"10px"}}>
+                <img src={imagen1} alt="Draggable" width="110" height="110" />
+                <img src={imagen2} alt="Draggable" width="110" height="110" />
+                <img src={imagen3} alt="Draggable" width="110" height="110" />
               </div>
 
               <DropContainer
@@ -322,11 +322,11 @@ const App = () => {
 
           {enabledContainer === 2 && (
             <div>
-              <div style={{ opacity: p ? 0 : 1, marginRight: "40px" }}>
-                <img src={imagen4} alt="Draggable" width="90" height="90" gap= "10px"/>
-                <img src={imagen5} alt="Draggable" width="90" height="90" />
-                <img src={imagen6} alt="Draggable" width="90" height="90" />
-                <img src={imagen9} alt="Draggable" width="90" height="90" />
+              <div style={{ opacity: p ? 0 : 1,backgroundColor:"blue",display:"flex", justifyContent: "space-evenly",marginBottom:"10px"}}>
+                <img src={imagen4} alt="Draggable" width="110" height="110"/>
+                <img src={imagen5} alt="Draggable" width="110" height="110" />
+                <img src={imagen6} alt="Draggable" width="110" height="110" />
+                <img src={imagen9} alt="Draggable" width="110" height="110" />
               </div>
 
               <DropContainer
@@ -342,13 +342,13 @@ const App = () => {
           )}
 
           {enabledContainer === 3 && (
-            <div>
-              <div style={{ opacity: p ? 0 : 1, marginRight: "40px" }}>
-                <img src={imagen5} alt="Draggable" width="90" height="90" />
-                <img src={imagen6} alt="Draggable" width="90" height="90" />
-                <img src={imagen7} alt="Draggable" width="90" height="90" />
-                <img src={imagen8} alt="Draggable" width="90" height="90" />
-                <img src={imagen9} alt="Draggable" width="90" height="90" />
+            <div >
+              <div style={{ opacity: p ? 0 : 1,backgroundColor:"blue",display:"flex", justifyContent: "space-evenly",marginBottom:"10px"}}>
+                <img src={imagen5} alt="Draggable" width="110" height="110" />
+                <img src={imagen6} alt="Draggable" width="110" height="110" />
+                <img src={imagen7} alt="Draggable" width="110" height="110" />
+                <img src={imagen8} alt="Draggable" width="110" height="110" />
+                <img src={imagen9} alt="Draggable" width="110" height="110" />
               </div>
 
               <DropContainer
@@ -392,7 +392,8 @@ const DropContainer = ({
         padding: "4px",
         maxHeight: "110",
         background: "#e6e6fa",
-        height: "100",
+        height: "110",
+        justifyContent: "space-evenly",
         marginBottom:"100px",
       }}
     >
@@ -402,8 +403,8 @@ const DropContainer = ({
           key={image.id}
           src={image.src}
           alt={`Dropped ${index}`}
-          width="100"
-          height="100"
+          width="110"
+          height="110"
         />
       ))}
     </div>
@@ -428,9 +429,12 @@ const DraggableImage = ({ image, handleDragStart, isDragged, disable, p }) => {
       draggable={false}
       onDragStart={(event) => handleDrag(event, image)}
       style={{
+        display:"flex",
         opacity: isDragged ? 1 : 0.8,
         marginRight: "20px",
-        background: "white",
+        background: "blue",
+        marginBottom:"20px",
+        boxShadow: '10px 4px 30px rgba(0, 123, 255, .5)', // Sombra en tono azul
       }}
     >
       <img
