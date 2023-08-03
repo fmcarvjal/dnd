@@ -16,6 +16,7 @@ import "./App.css"; // Archivo CSS para estilos personalizados
 
 const App = () => {
   const [p, setP] = useState(false);
+  const [p1, setP1] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [enabledContainer, setEnabledContainer] = useState(0);
   const [isReset, setIsReset] = useState(true);
@@ -93,6 +94,12 @@ const App = () => {
   };
   const cambioStrado = () => {
     setP((prevState) => !prevState);
+    setP1(false);
+  };
+
+  const cambioStrado1 = () => {
+    setP1((prevState) => !prevState);
+    setP(true);
   };
 
   const handleContainerToggle = (container) => {
@@ -116,6 +123,7 @@ const App = () => {
     if (enabledContainer) {
       const timer = setTimeout(() => {
         setP((prevP) => !prevP);
+      
         setIsButtonDisabled(false); // Habilitar el botón nuevamente después de los 5 segundos
         stopTimer();
       }, 5000); // 5 segundos en milisegundos
@@ -241,7 +249,10 @@ const App = () => {
            
             <div style={{ marginBottom: "0px" }}>
               <button onClick={cambioStrado} disabled={isButtonDisabled}>
-                {p ? "Mostrar Secuencia" : "Seleccione una Secuencia"}
+                {"Mostrar Secuencia"}
+              </button>
+              <button onClick={cambioStrado1} disabled={isButtonDisabled}>
+                {"Secuencias"}
               </button>
             </div>
             <div className="time" >
@@ -251,7 +262,7 @@ const App = () => {
           {/* Agregar botones de selección para habilitar contenedores */}
 
           <div
-            className={`${!p ? "expanded" : "contracted"}`}
+            className={`${p1 ? "expanded" : "contracted"}`}
             style={{
               display: "flex",
               flexDirection: "row",
