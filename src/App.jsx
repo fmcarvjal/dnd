@@ -304,9 +304,9 @@ const App = () => {
           {enabledContainer === 1 && (
             <div>
               <div style={{ opacity: p ? 0 : 1,backgroundColor:"blue",display:"flex", justifyContent: "space-evenly",marginBottom:"10px"}}>
-                <img src={imagen1} alt="Draggable" width="110" height="110" />
-                <img src={imagen2} alt="Draggable" width="110" height="110" />
-                <img src={imagen3} alt="Draggable" width="110" height="110" />
+                <img src={imagen1} alt="Draggable" width="95" height="95" />
+                <img src={imagen2} alt="Draggable" width="95" height="95" />
+                <img src={imagen3} alt="Draggable" width="95" height="95" />
               </div>
 
               <DropContainer
@@ -323,10 +323,10 @@ const App = () => {
           {enabledContainer === 2 && (
             <div>
               <div style={{ opacity: p ? 0 : 1,backgroundColor:"blue",display:"flex", justifyContent: "space-evenly",marginBottom:"10px"}}>
-                <img src={imagen4} alt="Draggable" width="110" height="110"/>
-                <img src={imagen5} alt="Draggable" width="110" height="110" />
-                <img src={imagen6} alt="Draggable" width="110" height="110" />
-                <img src={imagen9} alt="Draggable" width="110" height="110" />
+                <img src={imagen4} alt="Draggable" width="95" height="95"/>
+                <img src={imagen5} alt="Draggable" width="95" height="95" />
+                <img src={imagen6} alt="Draggable" width="95" height="95" />
+                <img src={imagen9} alt="Draggable" width="95" height="95" />
               </div>
 
               <DropContainer
@@ -344,11 +344,11 @@ const App = () => {
           {enabledContainer === 3 && (
             <div >
               <div style={{ opacity: p ? 0 : 1,backgroundColor:"blue",display:"flex", justifyContent: "space-evenly",marginBottom:"10px"}}>
-                <img src={imagen5} alt="Draggable" width="110" height="110" />
-                <img src={imagen6} alt="Draggable" width="110" height="110" />
-                <img src={imagen7} alt="Draggable" width="110" height="110" />
-                <img src={imagen8} alt="Draggable" width="110" height="110" />
-                <img src={imagen9} alt="Draggable" width="110" height="110" />
+                <img src={imagen5} alt="Draggable" width="95" height="95" />
+                <img src={imagen6} alt="Draggable" width="95" height="95" />
+                <img src={imagen7} alt="Draggable" width="95" height="95" />
+                <img src={imagen8} alt="Draggable" width="95" height="95" />
+                <img src={imagen9} alt="Draggable" width="95" height="95" />
               </div>
 
               <DropContainer
@@ -403,8 +403,8 @@ const DropContainer = ({
           key={image.id}
           src={image.src}
           alt={`Dropped ${index}`}
-          width="110"
-          height="110"
+          width="95"
+          height="95"
         />
       ))}
     </div>
