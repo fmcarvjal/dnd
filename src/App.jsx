@@ -248,12 +248,13 @@ const App = () => {
           <div className="timer-and-button">
            
             <div style={{ marginBottom: "0px" }}>
-              <button onClick={cambioStrado} disabled={isButtonDisabled}>
-                {"Mostrar Secuencia"}
+            <button onClick={cambioStrado1} disabled={isButtonDisabled || p1}>
+                {"Actividades"}
               </button>
-              <button onClick={cambioStrado1} disabled={isButtonDisabled}>
-                {"Secuencias"}
+              <button onClick={cambioStrado} disabled={isButtonDisabled || !p}>
+                {"Secuencia"}
               </button>
+             
             </div>
             <div className="time" >
               <h2>    {time} </h2>
