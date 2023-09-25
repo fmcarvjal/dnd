@@ -56,16 +56,69 @@ const App = () => {
     return () => clearInterval(interval); // Limpiar el intervalo cuando se desmonte el componente
   }, [isRunning]);
 
-  const checkMessage = (droppedImages, correctImages, setMessage) => {
-    const sortedDroppedImages = droppedImages.map((image) => image.src).sort();
-    const sortedCorrectImages = correctImages.sort();
-
-    if (sortedDroppedImages.join(",") === sortedCorrectImages.join(",")) {
-      setMessage("");
+  function textoAVoz(texto) {
+    if ('speechSynthesis' in window) {
+      const synthesis = window.speechSynthesis;
+      const utterance = new SpeechSynthesisUtterance(texto);
+      synthesis.speak(utterance);
     } else {
-      setMessage(" ");
+      console.error('La API de síntesis de voz no está disponible en este navegador.');
+    }
+  }
+
+  const checkMessage = (droppedImages, correctImages, setMessage) => {
+    // Convierte los arreglos en cadenas de texto sin ordenar
+    const droppedImagesStr = droppedImages.map((image) => image.src).join(",");
+    const correctImagesStr = correctImages.join(",");
+  
+    if (droppedImages.length === 0) {
+      setMessage(""); // No establecer ningún mensaje si droppedCount es cero
+      return;
+    }
+  
+    // Compara las cadenas de texto sin ordenar
+    if (droppedImagesStr === correctImagesStr) {
+      setMessage("Todas las imágenes coinciden.");
+      textoAVoz("Todas las imágenes coinciden.")
+    } else {
+      const droppedCount = droppedImages.length;
+      const correctCount = correctImages.length;
+  
+      if (correctCount - droppedCount === 0) {
+        // Verificar si las imágenes son correctas
+        const areImagesCorrect = correctImages.every((correctImage, index) => {
+          return correctImage === droppedImages[index].src;
+        });
+  
+        if (areImagesCorrect) {
+          const correctImagesMessage ="Todas las imágenes son correctas. 😄"
+          setMessage("Todas las imágenes son correctas.");
+          textoAVoz(correctImagesMessage)
+        } else {
+
+          setMessage(`Las imágenes no coinciden.`);
+          textoAVoz(`Las imágenes no coinciden vuelve a intentar.`)
+          setMessage(``);
+        }
+      } else if (correctCount - droppedCount === 1) {
+        const missingImagesMessage = `Falta colocar una imágen.`;
+
+        setMessage(missingImagesMessage);
+  
+        // Convertir el mensaje a voz
+        textoAVoz(missingImagesMessage)
+      }else if (correctCount - droppedCount >1) {
+        const missingImagesMessage = `Faltan colocar ${correctCount - droppedCount} imágenes.`;
+
+        setMessage(missingImagesMessage);
+  
+        // Convertir el mensaje a voz
+        textoAVoz(missingImagesMessage)
+      }
     }
   };
+  
+  
 
   const handleDrop = (event, image, container) => {
     event.preventDefault();
@@ -93,16 +146,20 @@ const App = () => {
     event.preventDefault();
   };
   const cambioStrado = () => {
+   
     setP((prevState) => !prevState);
     setP1(false);
+    textoAVoz("¡Mostrando la secuencia correcta!")
   };
 
   const cambioStrado1 = () => {
     setP1((prevState) => !prevState);
     setP(true);
+    textoAVoz("Selecciona una actividad")
   };
 
   const handleContainerToggle = (container) => {
+    textoAVoz("Recuerda las imágenes y el orden en el que están colocadas")
     setEnabledContainer(container); // Cambiar el contenedor habilitado
     setDroppedImages1([]);
     setDroppedImages2([]);
@@ -126,7 +183,8 @@ const App = () => {
       
         setIsButtonDisabled(false); // Habilitar el botón nuevamente después de los 5 segundos
         stopTimer();
-      }, 5000); // 5 segundos en milisegundos
+        textoAVoz("!Arrastra y suelta las imágenes una por una en el mismo orden que las viste antes.")
+      }, 7000); // 7 segundos en milisegundos
 
       setIsButtonDisabled(true); // Deshabilitar el botón mientras ocurre el cambio automático
 
@@ -159,7 +217,6 @@ const App = () => {
         <h2> MEMORIA VISUAL - ARRASTRAR Y SOLTAR</h2>{" "}
       </div>
 
-      {/* Visualización del cronómetro */}
 
       <div className="app-container">
         <div
